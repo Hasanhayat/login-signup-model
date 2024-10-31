@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2037/2037710.png">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sign Up</h1>
+      <form onsubmit="user();return false;">
+        <input class="signup-name" type="text" placeholder="Name" required />
+        <input class="signup-email" type="email" placeholder="Email" required />
+        <span class="signup-note note"></span>
+        <input
+          class="signup-password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <button>Sign Up</button>
+        <p>Already have an account? <a href="index.html">Login</a></p>
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
