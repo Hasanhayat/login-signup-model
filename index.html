@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5087/5087579.png">
+    <link
+      rel="icon"
+      href="https://cdn-icons-png.flaticon.com/512/5087/5087579.png"
+    />
   </head>
   <body>
     <div class="container">
       <h1>Login</h1>
-      <form onsubmit="user();return false">
+      <form id="login-form">
         <input class="login-email" type="email" placeholder="Email" required />
         <span class="login-note note"></span>
         <input
@@ -24,5 +27,13 @@
       </form>
     </div>
     <script src="script.js"></script>
+    <script>
+      document
+        .querySelector("#login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          user();
+        });
+    </script>
   </body>
 </html>

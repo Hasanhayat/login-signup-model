@@ -1,3 +1,6 @@
+
+
+
 function user() {
   let users = JSON.parse(localStorage.getItem("users"));
 
@@ -27,7 +30,7 @@ function user() {
         if (!emailExist) {
           users.push(userData);
           localStorage.setItem("users", JSON.stringify(users));
-          signup_email_note.innerHTML = "";
+          signup_note.innerHTML = "";
           window.location.href = "./dashboard.html";
         } else {
           signup_note.innerHTML = "Email already exist";
