@@ -1,5 +1,28 @@
+let icon = document.querySelector("i");
+let passwordInput = document.querySelector(".password");
 
+icon.addEventListener("mousedown", () => {
+  // Show password
+  passwordInput.type = "text";
+  icon.classList.replace("fa-eye", "fa-eye-slash");
+});
 
+icon.addEventListener("mouseup", () => {
+  // Hide password
+  passwordInput.type = "password";
+  icon.classList.replace("fa-eye-slash", "fa-eye");
+});
+
+// For touch devices
+icon.addEventListener("touchstart", () => {
+  passwordInput.type = "text";
+  icon.classList.replace("fa-eye", "fa-eye-slash");
+});
+
+icon.addEventListener("touchend", () => {
+  passwordInput.type = "password";
+  icon.classList.replace("fa-eye-slash", "fa-eye");
+});
 
 function user() {
   let users = JSON.parse(localStorage.getItem("users"));
@@ -18,6 +41,18 @@ function user() {
         email: signup_email,
         password: signup_password,
       };
+      try {
+        if (userData.password.length > 12) {
+          throw "Password must be a maximum of 12 characters";
+        }
+        if (userData.password.length < 8) {
+          throw "Password must be a minimum of 8 characters";
+        }
+      } catch (error) {
+        console.error(error);
+        signup_note.innerHTML = error;
+        return;
+      }
 
       if (users) {
         let emailExist;
@@ -27,13 +62,19 @@ function user() {
             break;
           }
         }
-        if (!emailExist) {
+
+        try {
+          if (emailExist) {
+            throw "Email already exists";
+          }
           users.push(userData);
           localStorage.setItem("users", JSON.stringify(users));
-          signup_note.innerHTML = "";
+          signup_note.innerHTML = "Signup successful!";
           window.location.href = "./dashboard.html";
-        } else {
-          signup_note.innerHTML = "Email already exist";
+        } catch (error) {
+          console.error(error);
+          signup_note.innerHTML = error;
+          return;
         }
       } else {
         localStorage.setItem("users", JSON.stringify([userData]));
@@ -50,21 +91,25 @@ function user() {
 
     const login = () => {
       console.log("login");
-      for (let i = 0; i < users.length; i++) {
-        if (
-          users[i].email == login_email &&
-          users[i].password == login_password
-        ) {
-          isDataMatched = true;
+      if (users) {
+        for (let i = 0; i < users.length; i++) {
+          if (
+            users[i].email == login_email &&
+            users[i].password == login_password
+          ) {
+            isDataMatched = true;
+          }
         }
+      } else {
+        login_note.innerHTML = "Signup to register yourself.";
+        return;
       }
       if (isDataMatched) {
         window.location.href = "./dashboard.html";
         login_note.innerHTML = "";
         console.log("good");
       } else {
-        login_note.innerHTML =
-          "Invalid Email or Password.<br> Signup to register yourself.";
+        login_note.innerHTML = "Invalid Email or Password.";
       }
     };
     login();

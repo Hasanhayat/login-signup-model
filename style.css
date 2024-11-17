@@ -69,3 +69,8 @@ a:hover {
     color: red;
     font-size: smaller;
 }
+i{
+    position: relative;
+    bottom: 39px;
+    left: 175px;
+}
