@@ -33,6 +33,10 @@ function user() {
     let signup_password = document.querySelector(".signup-password").value;
     let signup_note = document.querySelector(".signup-note");
 
+    if (!signup_email || !signup_name || !signup_password) {
+      signup_note.innerHTML = "Please fill the form!";
+      return;
+    }
     const signup = () => {
       console.log("signup");
 
@@ -89,6 +93,10 @@ function user() {
 
     let isDataMatched;
 
+    if (!login_email || !login_password) {
+      login_note.innerHTML = "Please fill the form!";
+      return;
+    }
     const login = () => {
       console.log("login");
       if (users) {
